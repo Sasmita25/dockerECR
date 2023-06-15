@@ -14,14 +14,17 @@ jobs:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
+      - name: login to ECR
+        uses: aws-actions/amazon-ecr-login@261a7de32bda11ba01f4d75c4ed6caf3739e54be
       - name: setup docker buildX
         uses: docker/setup-buildx-action@4b4e9c3e2d4531116a6f8ba8e71fc6e2cb6e6c8c
-      - name: Login to docker 
-        run: docker login -u ${{secrets.AWS_USER}} -p 376329890665.dkr.ecr.us-east-1.amazonaws.com/krishna-cf-test
+#       - name: Login to docker 
+#         run: docker login -u AWS -p 376329890665.dkr.ecr.us-east-1.amazonaws.com/krishna-cf-test
 #       - name: Login to Amazon ECR
 #         id: login-ecr
 #         uses: aws-actions/amazon-ecr-login@v1
       - name: Docker build and push to ECR
         run: |
            docker buildx build --platform [linux/amd64,linux/arm64]  -t  dockpush:v1 --file Dockerfile . --output type=docker
-           docker push "krishna-cf-test/dockpush:v1"
+           docker tag dockpush:v1 376329890665.dkr.ecr.us-east-1.amazonaws.com/krishna-cf-test
+           docker push 376329890665.dkr.ecr.us-east-1.amazonaws.com/krishna-cf-test
