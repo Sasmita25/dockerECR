@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
 jobs:
   docker-login:
-    name: "print hello"
+    name: "reh"
     runs-on: ubuntu-latest
     steps:
       - name: "Pull"
@@ -18,7 +18,10 @@ jobs:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ env.AWS_REGION }}
-      - name: Login AWS
-        uses: 
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
       - name: Docker build and push to ECR
-        uses: 
+        run: |
+           docker buildx build --platform [linux/amd64,linux/arm64]  -t  dockpush:v1 --file Dockerfile . --output type=docker
+           docker push "krishna-cf-test/dockpush:v1"
