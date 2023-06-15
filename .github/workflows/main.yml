@@ -1,0 +1,24 @@
+name: Build and Push a Docker Image to ECR
+on:
+  workflow_dispatch:
+jobs:
+  docker-login:
+    name: "print hello"
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Pull"
+        uses: actions/checkout@v2
+      - name: setup docker buildX
+        uses: docker/setup-buildx-action@4b4e9c3e2d4531116a6f8ba8e71fc6e2cb6e6c8c
+      - name: Login to docker
+        run: docker login --username Sasmita25 --password ${{secrets.dockerPWD}}
+      - name: Configure AWS
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+      - name: Login AWS
+        uses: 
+      - name: Docker build and push to ECR
+        uses: 
