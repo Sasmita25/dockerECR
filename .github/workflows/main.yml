@@ -11,7 +11,7 @@ jobs:
       - name: setup docker buildX
         uses: docker/setup-buildx-action@4b4e9c3e2d4531116a6f8ba8e71fc6e2cb6e6c8c
       - name: Login to docker
-        run: docker login https://us-east-1.console.aws.amazon.com/ecr/repositories/private/376329890665/krishna-cf-test?region=us-east-1 --username ${{secrets.AWS_USER}} --password  ${{secrets.AWS_PASS}}
+        run: docker login https://us-east-1.console.aws.amazon.com/ecr/repositories/private/376329890665/krishna-cf-test?region=us-east-1 --username  ${{ secrets.AWS_ACCESS_KEY_ID }} --password ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 #       - name: Configure AWS
 #         uses: aws-actions/configure-aws-credentials@v1
 #         with:
