@@ -26,5 +26,5 @@ jobs:
       - name: Docker build and push to ECR
         run: |
            docker buildx build --build-arg linux/amd64,linux/arm64  -t  dockpush:v1 --file Dockerfile . --output type=docker
-           docker tag dockpush:v1 376329890665.dkr.ecr.us-east-1.amazonaws.com/krishna-cf-test
-           docker push 376329890665.dkr.ecr.us-east-1.amazonaws.com/krishna-cf-test
+           docker tag dockpush:v1 376329890665.dkr.ecr.us-east-1.amazonaws.com/krishna-cf-test:imgpush
+           docker push 376329890665.dkr.ecr.us-east-1.amazonaws.com/krishna-cf-test:imgpush
